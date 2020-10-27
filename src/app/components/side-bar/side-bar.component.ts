@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
-
+  task = [
+    { name: 'Vegetables', completed: false },
+    { name: 'Fashion', completed: false  },
+    { name: 'Electronics', completed: false}
+  ]
   constructor() { }
 
   ngOnInit(): void {

@@ -1,1 +1,10 @@
-<p>side-bar works!</p>
+<mat-card>
+        <ul>
+            <li *ngFor="let subtask of task">
+                <mat-checkbox [(ngModel)]="subtask.completed"
+                    (ngModelChange)="updateAllComplete()">
+                    {{subtask.name}}
+                </mat-checkbox>
+            </li>
+        </ul>
+</mat-card>
