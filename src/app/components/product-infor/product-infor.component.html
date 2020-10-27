@@ -1,13 +1,10 @@
 <mat-card class="example-card">
-        <mat-card-header>
-                <p>{{product.pName}}</p>
-            </mat-card-header>
-    <img mat-card-image src="{{product.image}}" alt="product pic">
+    <img mat-card-image src="{{product.image}}"  alt="product pic">
     <mat-card-content>
+            <p>{{product.pName}}</p>
         <p>
             {{product.description | slice:[150]}}
         </p>
-        <p>{{product.rating}}</p>
         <button mat-icon-button color="warn" *ngFor="let product of ConvertString(product.rating)">
             <mat-icon>favorite</mat-icon>
         </button>

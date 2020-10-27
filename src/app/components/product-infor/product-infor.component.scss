@@ -1,16 +1,7 @@
-.example-card {
-    max-width: 400px;
-  }
- 
- img {
-     display: block;
-      width: 50%;
-      height: 50%;
-      margin: 0 auto;
-  }
-  * {
-      outline: none;
-  }
-  .description{
-      text-overflow: ellipsis;
+
+
+  img {
+    height: min-content; //so that it takes up full space
+    max-height: 100px !important; // this prevents the image from being extremely big
+    object-fit: scale-down; 
   }
