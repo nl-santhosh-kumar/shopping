@@ -1,0 +1,13 @@
+
+
+<mat-grid-list cols="3">
+        <mat-grid-tile
+            *ngFor="let tile of tiles">
+            <app-product-infor></app-product-infor>
+        </mat-grid-tile>
+        
+      </mat-grid-list>
+      <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
