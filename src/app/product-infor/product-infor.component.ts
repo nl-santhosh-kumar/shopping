@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Cart } from '../reducers/index';
-import { AddProductAction } from '../actions/cart.actions';
+import { AppState } from '../reducers/index';
+import { Product } from '../reducers/index'
 @Component({
   selector: 'app-product-infor',
   templateUrl: './product-infor.component.html',
@@ -9,17 +9,10 @@ import { AddProductAction } from '../actions/cart.actions';
 })
 export class ProductInforComponent implements OnInit {
 
-
-  constructor(public store: Store < Cart > ) {}
-
+  constructor(public store: Store < AppState > ) {}
+  @Input() product: Product;
   ngOnInit(): void {
   }
-
     addProduct () {
-      this.store.dispatch(new AddProductAction({
-        name: 'adsf',
-        price: 0,
-        quantity: 0
-      }))
     }
 }

@@ -1,5 +1,5 @@
 import {
-    Action
+    Action, createAction, props
 } from '@ngrx/store';
 import { Product } from '../reducers';
 
@@ -14,10 +14,41 @@ export enum CartActionTypes {
     UPDATE_PRODUCT = '[UPDATE] Product',
     UPDATE_PRODUCT_SUCCESS = '[UPDATE] Product Success',
     UPDATE_PRODUCT_FAILURE = '[UPDATE] Product Failure',
-    CLEAR_CART ='[CLEAR] CART',
+    CLEAR_CART = '[CLEAR] CART',
     CLEAR_CART_SUCCESS = '[CLEAR] CART Success',
     CLEAR_CART_FAILURE = '[CLEAR] CART Failure',
+    LOAD_PRODUCTS = '[LOAD] Load Products',
+    LOAD_PRODUCTS_SUCCESS = '[Load] Product Success',
+    LOAD_PRODUCTS_FAILURE = '[Load] Product Failure'
 }
+
+
+
+export const LOAD_PRODUCTS = createAction(
+    '[LOAD PRODUCTS] populate product list'
+);
+export const LOAD_PRODUCTS_SUCCESS = createAction(
+    '[LOAD PRODUCTS] populate product list success',
+    props<{ products: Product[] }>()
+);
+export const LOAD_PRODUCTS_FAILURE = createAction(
+    '[POPULATE Effects] update city failure',
+    props<{ err: any }>()
+);
+
+export const ADD_PRODUCT = createAction(
+    '[LOAD PRODUCTS] populate product list'
+);
+export const ADD_PRODUCT_SUCCESS = createAction(
+    '[LOAD PRODUCTS] populate product list success',
+    props<{ products: Product[] }>()
+);
+export const ADD_PRODUCT_FAILURE = createAction(
+    '[POPULATE Effects] update city failure',
+    props<{ err: any }>()
+);
+
+
 
 export class AddProductAction implements Action {
     readonly type = CartActionTypes.ADD_PRODUCT;
@@ -73,6 +104,6 @@ export class ClearCartFailure implements Action {
 export type CartActions =
     AddProductAction |
     AddProductSuccessAction |
-    AddProductFailureAction| UpdateProduct | UpdateProductFailure | UpdateProductSuccess |
+    AddProductFailureAction | UpdateProduct | UpdateProductFailure | UpdateProductSuccess |
     DeleteProduct | DeleteProductSuccess | DeleteProductSuccess |
     ClearCart | ClearCartFailure | ClearCartSuccess;

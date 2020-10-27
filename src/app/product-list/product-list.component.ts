@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
+import { AppState, getProducts } from '../reducers/index'
+import { Store, select } from '@ngrx/store';
+import { LOAD_PRODUCTS } from '../actions/cart.actions';
+import { Product} from '../reducers/index'
 
 @Component({
   selector: 'app-product-list',
@@ -13,25 +10,20 @@ export interface Tile {
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  products = [];
 
-  tiles: Tile[] = [
-    {text: 'Product 1', cols: 1, rows: 1, color: 'lightblue'},
-    {text: 'product 2', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'Product 3', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Product 4', cols: 1, rows: 1, color: '#DDBDF1'},
-    {text: 'Product 1', cols: 1, rows: 1, color: 'lightblue'},
-    {text: 'product 2', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'Product 3', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Product 4', cols: 1, rows: 1, color: '#DDBDF1'},
-    {text: 'Product 1', cols: 1, rows: 1, color: 'lightblue'},
-    {text: 'product 2', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'Product 3', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Product 4', cols: 1, rows: 1, color: '#DDBDF1'},
-  ];
-
-  constructor() { }
+  constructor(public store: Store<AppState>) {}
 
   ngOnInit(): void {
+    this.store.dispatch(LOAD_PRODUCTS());
+    this.store.select(getProducts).subscribe((product) => {
+      this.products= product
+    })
+
+    this.store.pipe(select(getProducts)).subscribe((products: Product[]) => {
+      this.products = products;
+
+    });
   }
 
 }

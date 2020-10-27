@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,8 +26,8 @@ import { LandingComponent } from './landing/landing.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductInforComponent } from './product-infor/product-infor.component';
-import { CartReducer } from './reducers';
-
+import { AppStateKey, AppReducer,  } from './reducers';
+import { AppEffects } from './effects/index'
 
 @NgModule({
   declarations: [
@@ -37,15 +39,21 @@ import { CartReducer } from './reducers';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({
+      AppStateKey: AppReducer
+    }),
+    HttpClientModule,
+    StoreModule.forFeature(AppStateKey, AppReducer),
+    EffectsModule.forRoot([AppEffects]),
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatGridListModule, MatCardModule, MatButtonModule, MatPaginatorModule, 
-    StoreModule.forRoot(CartReducer), !environment.production ? StoreDevtoolsModule.instrument() : []
+    MatGridListModule, MatCardModule, MatButtonModule, MatPaginatorModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
