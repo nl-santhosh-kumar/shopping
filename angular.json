@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "shopping-cart"
+  "defaultProject": "shopping-cart",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
