@@ -11,9 +11,7 @@ import { Product} from '../reducers/index'
 })
 export class ProductListComponent implements OnInit {
   products = [];
-
   constructor(public store: Store<AppState>) {}
-
   ngOnInit(): void {
     this.store.dispatch(LOAD_PRODUCTS());
     this.store.select(getProducts).subscribe((product) => {

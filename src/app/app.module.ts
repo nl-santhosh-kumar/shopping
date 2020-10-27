@@ -28,12 +28,14 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductInforComponent } from './product-infor/product-infor.component';
 import { AppStateKey, AppReducer,  } from './reducers';
 import { AppEffects } from './effects/index'
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    SearchBarComponent, ProductListComponent, ProductInforComponent
+    SearchBarComponent, ProductListComponent, ProductInforComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

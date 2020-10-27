@@ -3,7 +3,7 @@
         <mat-card-content>
             <p>{{product.pName}}</p>
             <p>
-             {{product.description}}
+             {{product.description | slice:[150]}}
             </p>
             <p>{{product.rating}}</p>
         </mat-card-content>

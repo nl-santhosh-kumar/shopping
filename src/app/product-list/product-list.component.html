@@ -3,3 +3,6 @@
     <app-product-infor [product] = "product"></app-product-infor>
   </mat-grid-tile>
 </mat-grid-list>
+<mat-paginator [length]="products.length || 0"
+              [pageSize]="10">
+</mat-paginator>
