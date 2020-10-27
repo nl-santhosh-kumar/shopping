@@ -22,20 +22,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 
-import { LandingComponent } from './landing/landing.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductInforComponent } from './product-infor/product-infor.component';
 import { AppStateKey, AppReducer,  } from './reducers';
 import { AppEffects } from './effects/index'
 import { TruncatePipe } from './truncate.pipe';
+import { LandingComponent } from './components/landing/landing.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductInforComponent } from './components/product-infor/product-infor.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     SearchBarComponent, ProductListComponent, ProductInforComponent,
-    TruncatePipe
+    TruncatePipe,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

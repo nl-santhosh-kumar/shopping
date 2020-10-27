@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../reducers/index';
-import { Product } from '../reducers/index'
+import { AppState } from '../../reducers/index';
+import { Product } from '../../reducers/index'
 @Component({
   selector: 'app-product-infor',
   templateUrl: './product-infor.component.html',
