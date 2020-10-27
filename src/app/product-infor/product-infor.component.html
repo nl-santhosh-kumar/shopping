@@ -1,15 +1,16 @@
 <mat-card class="example-card">
-        <img mat-card-image src="https://cdn-demo.algolia.com/bestbuy-0118/4397400_sb.jpg" alt="product pic">
-        <mat-card-content>
-            <p>{{product.pName}}</p>
-            <p>
-             {{product.description | slice:[150]}}
-            </p>
-            <p>{{product.rating}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-icon-button color="primary" aria-label="cart icon" (click)="addProduct()">
-                <mat-icon>add_shopping_cart</mat-icon> Add to cart
-            </button>
-        </mat-card-actions>
- </mat-card>
+    <img mat-card-image src="https://cdn-demo.algolia.com/bestbuy-0118/4397400_sb.jpg" alt="product pic">
+    <mat-card-content>
+        <p>{{product.pName}}</p>
+        <p>
+            {{product.description | slice:[150]}}
+        </p>
+        <p>{{product.rating}}</p>
+        <button mat-icon-button color="warn" *ngFor="let product of ConvertString(product.rating)">
+            <mat-icon>favorite</mat-icon>
+        </button>
+    </mat-card-content>
+    <mat-card-actions>
+            <button mat-flat-button color="primary">Add to cart</button>
+    </mat-card-actions>
+</mat-card>

@@ -15,4 +15,11 @@ export class ProductInforComponent implements OnInit {
   }
     addProduct () {
     }
+
+    ConvertString(value){
+      if(value){
+        return Array(parseFloat(value))
+      }
+     return []
+      }
 }
