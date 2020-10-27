@@ -1,7 +1,7 @@
 import {
     Action, createAction, props
 } from '@ngrx/store';
-import { Product } from '../reducers';
+import { Product,Category } from '../reducers';
 
 
 export enum CartActionTypes {
@@ -19,7 +19,10 @@ export enum CartActionTypes {
     CLEAR_CART_FAILURE = '[CLEAR] CART Failure',
     LOAD_PRODUCTS = '[LOAD] Load Products',
     LOAD_PRODUCTS_SUCCESS = '[Load] Product Success',
-    LOAD_PRODUCTS_FAILURE = '[Load] Product Failure'
+    LOAD_PRODUCTS_FAILURE = '[Load] Product Failure',
+    ADD_CATEGORY = '[ADD] Category',
+    ADD_CATEGORY_SUCCESS = '[ADD] Category Success',
+    ADD_CATEGORY_FAILURE = '[ADD] Category Failure',
 }
 
 
@@ -48,6 +51,17 @@ export const ADD_PRODUCT_FAILURE = createAction(
     props<{ err: any }>()
 );
 
+export const ADD_CATEGORY = createAction(
+    '[LOAD CATEGORY] populate product list'
+);
+export const ADD_CATEGORY_SUCCESS = createAction(
+    '[LOAD CATEGORY] populate product list success',
+    props<{ categories: Category[] }>()
+);
+export const ADD_CATEGORY_FAILURE = createAction(
+    '[LOAD CATEGORY FAIL] update city failure',
+    props<{ err: any }>()
+);
 
 
 export class AddProductAction implements Action {

@@ -1,7 +1,9 @@
 <mat-card class="example-card">
-    <img mat-card-image src="https://cdn-demo.algolia.com/bestbuy-0118/4397400_sb.jpg" alt="product pic">
+        <mat-card-header>
+                <p>{{product.pName}}</p>
+            </mat-card-header>
+    <img mat-card-image src="{{product.image}}" alt="product pic">
     <mat-card-content>
-        <p>{{product.pName}}</p>
         <p>
             {{product.description | slice:[150]}}
         </p>

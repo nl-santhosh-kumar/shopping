@@ -1,6 +1,9 @@
 import * as Actions from '../actions/cart.actions';
 import { createFeatureSelector, createSelector, createReducer, on } from '@ngrx/store';
 
+export interface Category {
+  cName: string
+}
 export interface Product {
   name: string;
   price: number;
@@ -9,16 +12,19 @@ export interface Product {
   description: string
   inventory: number
   pName: string
-  rating: number
+  rating: number;
+  image: string
 }
 export interface AppState {
   products: Product[];
+  categories: Category[];
   total: number;
 }
 
 const initialState: AppState = {
   products: [],
-  total: 0
+  total: 0,
+  categories: []
 };
 
 export const AppStateKey = 'AppStateKey';
@@ -38,6 +44,18 @@ const _reducer = createReducer(
       products: state.products
     };
   }),
+  on(Actions.ADD_CATEGORY_SUCCESS, (state, action) => {
+    console.log(action.categories)
+    return {
+      ...state,
+     categories: action.categories
+    };
+  }),
+  on(Actions.ADD_CATEGORY_FAILURE, (state, action) => {
+    return {
+      ...state
+    };
+  }),
 );
 
 
@@ -52,4 +70,9 @@ export const stateFeature = createFeatureSelector<AppState>(AppStateKey);
 export const getProducts = createSelector(
   stateFeature,
   (state: AppState) => state.products
+);
+
+export const getCategories = createSelector(
+  stateFeature,
+  (state: AppState) => state.categories
 );

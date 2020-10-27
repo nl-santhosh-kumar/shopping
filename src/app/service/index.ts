@@ -14,5 +14,8 @@ export class Service {
     getProductList() {
        return  (this.http.get<any>(endpoint+'product'))
     }
+    getCategoryList () {
+        return  (this.http.get<any>(endpoint+'category'))
+    }
 
 }

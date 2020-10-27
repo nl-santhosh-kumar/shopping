@@ -1,9 +1,9 @@
 <mat-card>
         <ul>
-            <li *ngFor="let subtask of task">
-                <mat-checkbox [(ngModel)]="subtask.completed"
+            <li *ngFor="let subtask of categories">
+                <mat-checkbox 
                     (ngModelChange)="updateAllComplete()">
-                    {{subtask.name}}
+                    {{subtask.cName}}
                 </mat-checkbox>
             </li>
         </ul>
