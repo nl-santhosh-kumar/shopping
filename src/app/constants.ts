@@ -1,1 +1,1 @@
-export const endpoint = 'http://hello-openshift-superkings.redhat-hackathon-ocp-a39cdf59c11fe9ef74002319618f3999-0000.eu-gb.containers.appdomain.cloud/'
+export const endpoint = 'http://retail-backend-superkings.redhat-hackathon-ocp-a39cdf59c11fe9ef74002319618f3999-0000.eu-gb.containers.appdomain.cloud/'
