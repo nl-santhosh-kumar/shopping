@@ -5,7 +5,8 @@ import {
     HttpClient
 } from '@angular/common/http';
 import { endpoint } from '../constants';
-import { User, UserLogin } from '../interface';
+import { User, UserLogin, Product, Category } from '../interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,18 +15,19 @@ import { User, UserLogin } from '../interface';
 
 export class Service {
     constructor(private http: HttpClient) { }
-    getProductList() {
-       return  (this.http.get<any>(endpoint+'product'))
+    getProductList(): Observable<Product[]> {
+       return  (this.http.get<Product[]>(`${endpoint}product`));
     }
-    getCategoryList () {
-        return  (this.http.get<any>(endpoint+'category'))
+    getCategoryList(): Observable<Category[]> {
+        return  (this.http.get<Category[]>(`${endpoint}category`));
     }
 
-    login (user: UserLogin) {
+    login(user: UserLogin): Observable<object> {
         return this.http.post(`${endpoint}login`, user);
     }
-    registerUser (user: User) {
+    registerUser(user: User): Observable<object> {
         return this.http.post(`${endpoint}addUser`, user);
     }
+  
 
 }

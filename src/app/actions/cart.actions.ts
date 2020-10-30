@@ -5,10 +5,7 @@ import { Product,Category } from '../interface';
 
 
 export enum CartActionTypes {
-    ADD_PRODUCT = '[ADD] Product Cart',
-    ADD_PRODUCT_SUCCESS = '[ADD] Product Success',
-    ADD_PRODUCT_FAILURE = '[ADD] Product Failure',
-    DELETE_PRODUCT = '[DELETE] Product',
+    DELETE_PRODUCT = "DELETE PRODUCT",
     DELETE_PRODUCT_SUCCESS = '[DELETE] Product Success',
     DELETE_PRODUCT_FAILURE = '[DELETE] Product Failure',
     UPDATE_PRODUCT = '[UPDATE] Product',
@@ -17,9 +14,6 @@ export enum CartActionTypes {
     CLEAR_CART = '[CLEAR] CART',
     CLEAR_CART_SUCCESS = '[CLEAR] CART Success',
     CLEAR_CART_FAILURE = '[CLEAR] CART Failure',
-    LOAD_PRODUCTS = '[LOAD] Load Products',
-    LOAD_PRODUCTS_SUCCESS = '[Load] Product Success',
-    LOAD_PRODUCTS_FAILURE = '[Load] Product Failure',
     ADD_CATEGORY = '[ADD] Category',
     ADD_CATEGORY_SUCCESS = '[ADD] Category Success',
     ADD_CATEGORY_FAILURE = '[ADD] Category Failure'
@@ -42,15 +36,15 @@ export const LOAD_PRODUCTS_FAILURE = createAction(
     props<{ err: any }>()
 );
 
-export const ADD_PRODUCT = createAction(
-    '[LOAD PRODUCTS] populate product list'
+export const ADD_PRODUCT_TO_CART = createAction(
+    '[ADD PRODUCT TO CART] populate product list'
 );
-export const ADD_PRODUCT_SUCCESS = createAction(
-    '[LOAD PRODUCTS] populate product list success',
+export const ADD_PRODUCT_TO_CART_SUCCESS = createAction(
+    '[ADD PRODUCT TO CART] populate product list success',
     props<{ products: Product[] }>()
 );
-export const ADD_PRODUCT_FAILURE = createAction(
-    '[POPULATE Effects] update city failure',
+export const ADD_PRODUCT_TO_CART_FAILURE = createAction(
+    '[ADD PRODUCT TO CART] update city failure',
     props<{ err: any }>()
 );
 
@@ -66,19 +60,6 @@ export const ADD_CATEGORY_FAILURE = createAction(
     props<{ err: any }>()
 );
 
-
-export class AddProductAction implements Action {
-    readonly type = CartActionTypes.ADD_PRODUCT;
-    constructor(public payload: Product) { }
-}
-export class AddProductSuccessAction implements Action {
-    readonly type = CartActionTypes.ADD_PRODUCT_SUCCESS;
-    constructor(public payload: Product) { }
-}
-export class AddProductFailureAction implements Action {
-    readonly type = CartActionTypes.ADD_PRODUCT_FAILURE;
-    constructor(public payload: Error) { }
-}
 
 
 export class UpdateProduct implements Action {
@@ -118,9 +99,6 @@ export class ClearCartFailure implements Action {
 
 
 
-export type CartActions =
-    AddProductAction |
-    AddProductSuccessAction |
-    AddProductFailureAction | UpdateProduct | UpdateProductFailure | UpdateProductSuccess |
+export type CartActions = UpdateProduct | UpdateProductFailure | UpdateProductSuccess |
     DeleteProduct | DeleteProductSuccess | DeleteProductSuccess |
     ClearCart | ClearCartFailure | ClearCartSuccess;

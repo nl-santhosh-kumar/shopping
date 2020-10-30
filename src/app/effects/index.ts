@@ -14,11 +14,13 @@ import {
     of
 } from 'rxjs';
 import {
- CartActionTypes, LOAD_PRODUCTS_SUCCESS, LOAD_PRODUCTS, LOAD_PRODUCTS_FAILURE, ADD_CATEGORY, ADD_CATEGORY_FAILURE, ADD_CATEGORY_SUCCESS
+  LOAD_PRODUCTS_SUCCESS, LOAD_PRODUCTS, LOAD_PRODUCTS_FAILURE, ADD_CATEGORY, ADD_CATEGORY_FAILURE, ADD_CATEGORY_SUCCESS,
+  ADD_PRODUCT_TO_CART
 } from '../actions/cart.actions';
 import {
     Service
 } from '../service/index';
+import {Product, Category } from '../interface';
 
 @Injectable()
 export class AppEffects {
@@ -26,14 +28,21 @@ export class AppEffects {
     loadProducts$ = this.actions$.pipe(
         ofType(LOAD_PRODUCTS),
         switchMap(() => this.service.getProductList()),
-        switchMap(Product => of(LOAD_PRODUCTS_SUCCESS({products: Product}))),
+        switchMap((products: Product[]) => of(LOAD_PRODUCTS_SUCCESS({products}))),
         catchError(error => of(LOAD_PRODUCTS_FAILURE(error)))
     );
     @Effect()
     loadCategory$ = this.actions$.pipe(
         ofType(ADD_CATEGORY),
         switchMap(() => this.service.getCategoryList()),
-        switchMap(Category => of(ADD_CATEGORY_SUCCESS({categories: Category}))),
+        switchMap((categories: Category[]) => of(ADD_CATEGORY_SUCCESS({categories}))),
+        catchError(error => of(ADD_CATEGORY_FAILURE(error)))
+    );
+    @Effect()
+    addProductToCart$ = this.actions$.pipe(
+        ofType(ADD_PRODUCT_TO_CART),
+        switchMap(() => this.service.getCategoryList()),
+        switchMap((categories: Category[]) => of(ADD_CATEGORY_SUCCESS({categories}))),
         catchError(error => of(ADD_CATEGORY_FAILURE(error)))
     );
     constructor(
