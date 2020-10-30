@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppState, getProducts, getCategories } from '../../reducers/index';
+import { getProducts, getCategories } from '../../reducers/index';
 import { Store, select } from '@ngrx/store';
-import { Category } from '../../reducers/index';
+import { Category, AppState } from '../../interface';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',

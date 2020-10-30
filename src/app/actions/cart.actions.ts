@@ -1,7 +1,7 @@
 import {
     Action, createAction, props
 } from '@ngrx/store';
-import { Product,Category } from '../reducers';
+import { Product,Category } from '../interface';
 
 
 export enum CartActionTypes {
@@ -22,10 +22,13 @@ export enum CartActionTypes {
     LOAD_PRODUCTS_FAILURE = '[Load] Product Failure',
     ADD_CATEGORY = '[ADD] Category',
     ADD_CATEGORY_SUCCESS = '[ADD] Category Success',
-    ADD_CATEGORY_FAILURE = '[ADD] Category Failure',
+    ADD_CATEGORY_FAILURE = '[ADD] Category Failure'
 }
 
-
+export const SET_USER_ID = createAction(
+    '[SET] User Id to store',
+    props<{userId: string}>()
+);
 
 export const LOAD_PRODUCTS = createAction(
     '[LOAD PRODUCTS] populate product list'

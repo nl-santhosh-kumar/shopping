@@ -3,8 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Service } from 'src/app/service';
-import { UserLogin } from 'src/app/interface';
+import { UserLogin, AppState } from 'src/app/interface';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { SET_USER_ID } from 'src/app/actions/cart.actions';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +23,12 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private service: Service,
-        private _snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private store: Store<AppState>
     ) { }
 
     openSnackBar(message: string,) {
-        this._snackBar.open(message, null, {
+        this.snackBar.open(message, null, {
           duration: 2000,
         });
       }
@@ -64,9 +67,11 @@ export class LoginComponent implements OnInit {
                 (data: any) => {
                     if (data.statusMessage !== 'Invalid userId')
                     {
+                        const userId: string = user.userId
+                        this.store.dispatch(SET_USER_ID({userId}))
                         this.router.navigate(['/shopping']);
                     }
-                    this.openSnackBar('Login Failed, please try again')
+                    this.openSnackBar('Login Failed, please try again');
                 },
                 error => {
                     console.log(error)

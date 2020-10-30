@@ -1,30 +1,13 @@
 import * as Actions from '../actions/cart.actions';
 import { createFeatureSelector, createSelector, createReducer, on } from '@ngrx/store';
+import { AppState } from '../interface';
 
-export interface Category {
-  cName: string
-}
-export interface Product {
-  name: string;
-  price: number;
-  quantity: number;
-  category: string;
-  description: string
-  inventory: number
-  pName: string
-  rating: number;
-  image: string
-}
-export interface AppState {
-  products: Product[];
-  categories: Category[];
-  total: number;
-}
 
 const initialState: AppState = {
   products: [],
   total: 0,
-  categories: []
+  categories: [],
+  userId: ''
 };
 
 export const AppStateKey = 'AppStateKey';
@@ -53,6 +36,12 @@ const _reducer = createReducer(
   on(Actions.ADD_CATEGORY_FAILURE, (state, action) => {
     return {
       ...state
+    };
+  }),
+  on(Actions.SET_USER_ID, (state, action) => {
+    return {
+      ...state,
+      userId: action.userId
     };
   }),
 );

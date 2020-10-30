@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppState, getProducts } from '../../reducers/index';
+import { AppState } from '../../interface';
 import { Store, select } from '@ngrx/store';
 import { ADD_CATEGORY, LOAD_PRODUCTS } from '../../actions/cart.actions';
 @Component({
