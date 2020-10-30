@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppStateKey, AppReducer,  } from './reducers';
 import { AppEffects } from './effects/index'
@@ -31,6 +33,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductInforComponent } from './components/product-infor/product-infor.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -39,9 +43,14 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     LandingComponent,
     SearchBarComponent, ProductListComponent, ProductInforComponent,
     TruncatePipe,
-    SideBarComponent
+    SideBarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -61,7 +70,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
       logOnly: environment.production
     }),
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

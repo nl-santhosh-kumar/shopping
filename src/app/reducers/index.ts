@@ -45,7 +45,6 @@ const _reducer = createReducer(
     };
   }),
   on(Actions.ADD_CATEGORY_SUCCESS, (state, action) => {
-    console.log(action.categories)
     return {
       ...state,
      categories: action.categories

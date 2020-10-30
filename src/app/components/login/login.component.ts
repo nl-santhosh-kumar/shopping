@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Service } from 'src/app/service';
+import { UserLogin } from 'src/app/interface';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +13,6 @@ import { Service } from 'src/app/service';
 })
 export class LoginComponent implements OnInit {
     form: FormGroup;
-    loading = false;
     submitted = false;
     returnUrl: string;
 
@@ -18,13 +20,20 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private service: Service
+        private service: Service,
+        private _snackBar: MatSnackBar
     ) { }
+
+    openSnackBar(message: string,) {
+        this._snackBar.open(message, null, {
+          duration: 2000,
+        });
+      }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
             name: [''],
-            username: ['', Validators.required],
+            userId: ['', Validators.required],
             password: ['', Validators.required]
         });
 
@@ -45,18 +54,23 @@ export class LoginComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-
-        this.loading = true;
-        this.service.login(this.f.username.value, this.f.password.value)
+        const user: UserLogin = {
+           userId: this.f.userId.value,
+           password: this.f.password.value
+        }
+        this.service.login(user)
             .pipe(first())
             .subscribe(
-                data => {
-                    console.log('login successful');
-                    this.router.navigate(['/shopping']);
+                (data: any) => {
+                    if (data.statusMessage !== 'Invalid userId')
+                    {
+                        this.router.navigate(['/shopping']);
+                    }
+                    this.openSnackBar('Login Failed, please try again')
                 },
                 error => {
                     console.log(error)
-                    this.loading = false;
+                    this.openSnackBar('Login Failed, please try again'+ error)
                 });
     }
 }
