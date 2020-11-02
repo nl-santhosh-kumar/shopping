@@ -1,0 +1,8 @@
+<mat-toolbar style="background-color: #eff3f6">
+    <span>SuperKings Shopping</span>
+    <span class="example-spacer"></span>
+    <span matBadge="{{cartItems}}" matBadgeOverlap="false" matBadgePosition="before">
+     <i class="material-icons">shopping_cart</i> 
+    </span>
+    <i *ngIf="showProfile" class="material-icons">account_circle</i> 
+</mat-toolbar>

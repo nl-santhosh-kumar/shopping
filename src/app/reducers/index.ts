@@ -1,13 +1,18 @@
 import * as Actions from '../actions/cart.actions';
 import { createFeatureSelector, createSelector, createReducer, on } from '@ngrx/store';
-import { AppState } from '../interface';
+import { AppState, Cart } from '../interface';
 
 
 const initialState: AppState = {
   products: [],
   total: 0,
   categories: [],
-  userId: ''
+  userId: '',
+  cart: {
+    userId: null,
+    totalValue: 0,
+    product: []
+  }
 };
 
 export const AppStateKey = 'AppStateKey';
@@ -60,7 +65,16 @@ export const getProducts = createSelector(
   (state: AppState) => state.products
 );
 
+export const getUserId = createSelector(stateFeature,
+  (state: AppState) => state.userId
+);
+
 export const getCategories = createSelector(
   stateFeature,
   (state: AppState) => state.categories
 );
+export const getCart = createSelector(
+  stateFeature,
+  (state: AppState) => state.cart
+);
+

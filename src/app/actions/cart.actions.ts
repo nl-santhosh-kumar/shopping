@@ -62,6 +62,20 @@ export const ADD_CATEGORY_FAILURE = createAction(
 
 
 
+export const GET_CART = createAction(
+    '[GET] populate product list',
+    props<{userId: string}>()
+);
+export const GET_CART_SUCCESS = createAction(
+    '[GET] populate product list success',
+    props<{ cart: any }>()
+);
+export const GET_CART_FAILURE = createAction(
+    '[GET CART] update city failure',
+    props<{ err: any }>()
+);
+
+
 export class UpdateProduct implements Action {
     readonly type = CartActionTypes.UPDATE_PRODUCT;
     constructor(public payload: Product[]) { }

@@ -5,8 +5,10 @@ import {
     HttpClient
 } from '@angular/common/http';
 import { endpoint } from '../constants';
-import { User, UserLogin, Product, Category } from '../interface';
+import { User, UserLogin, Product, Category, AppState } from '../interface';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { getUserId } from '../reducers';
 
 @Injectable({
     providedIn: 'root'
@@ -14,12 +16,19 @@ import { Observable } from 'rxjs';
 
 
 export class Service {
-    constructor(private http: HttpClient) { }
+    userId: string = 'test';
+
+    constructor(private http: HttpClient, private store: Store<AppState>) {
+        this.userId = 'test'
+        this.store.pipe(select(getUserId)).subscribe((userId: string) => {
+            this.userId = userId;
+        });
+    }
     getProductList(): Observable<Product[]> {
-       return  (this.http.get<Product[]>(`${endpoint}product`));
+        return (this.http.get<Product[]>(`${endpoint}product`));
     }
     getCategoryList(): Observable<Category[]> {
-        return  (this.http.get<Category[]>(`${endpoint}category`));
+        return (this.http.get<Category[]>(`${endpoint}category`));
     }
 
     login(user: UserLogin): Observable<object> {
@@ -28,6 +37,18 @@ export class Service {
     registerUser(user: User): Observable<object> {
         return this.http.post(`${endpoint}addUser`, user);
     }
-  
+    getCart(userId: any): Observable<object> {
+        return this.http.get(`${endpoint}cart/${userId.userId}`);
+    }
+    addToCart(): Observable<object> {
+        return this.http.post(`${endpoint}cart/add`, {
+            userId: this.userId,
+            products: [{
+                name: 'Shirt',
+                price: 200,
+                quantity: '1'
+            }]
+        });
 
+    }
 }

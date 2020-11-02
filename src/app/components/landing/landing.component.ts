@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from '../../interface';
 import { Store, select } from '@ngrx/store';
-import { ADD_CATEGORY, LOAD_PRODUCTS } from '../../actions/cart.actions';
+import { ADD_CATEGORY, LOAD_PRODUCTS, GET_CART } from '../../actions/cart.actions';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -13,7 +13,8 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(LOAD_PRODUCTS());
-    this.store.dispatch(ADD_CATEGORY())
+    this.store.dispatch(ADD_CATEGORY());
+    this.store.dispatch(GET_CART({userId: 'test'}));
   }
 
 }

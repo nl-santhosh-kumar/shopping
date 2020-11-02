@@ -24,6 +24,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { AppStateKey, AppReducer,  } from './reducers';
 import { AppEffects } from './effects/index'
@@ -35,6 +36,7 @@ import { ProductInforComponent } from './components/product-infor/product-infor.
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { RegisterComponent } from './components/register/register.component';
     TruncatePipe,
     SideBarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ToolBarComponent
   ],
   imports: [
     FormsModule,
@@ -71,7 +74,8 @@ import { RegisterComponent } from './components/register/register.component';
     }),
     MatListModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
