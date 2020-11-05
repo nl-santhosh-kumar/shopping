@@ -4,27 +4,35 @@ import {
 import {
     Actions,
     Effect,
-    ofType
+    ofType 
 } from '@ngrx/effects';
 import {
     catchError,
-    switchMap
+    switchMap,
+    pluck
 } from 'rxjs/operators';
 import {
     of
 } from 'rxjs';
 import {
     LOAD_PRODUCTS_SUCCESS, LOAD_PRODUCTS, LOAD_PRODUCTS_FAILURE, ADD_CATEGORY, ADD_CATEGORY_FAILURE, ADD_CATEGORY_SUCCESS,
-    ADD_PRODUCT_TO_CART,
     GET_CART,
     GET_CART_SUCCESS,
-    GET_CART_FAILURE
+    GET_CART_FAILURE,
+   
+    UpdateCart,
+    UpdateCartSuccess,
+    UpdateCartFailure,
+    UPDATE_CART,
+    UPDATE_CART_SUCCESS,
+    UPDATE_CART_FAILURE
 } from '../actions/cart.actions';
 import {
     Service
 } from '../service/index';
-import { Product, Category } from '../interface';
+import { Product, Category, AppState } from '../interface';
 
+import {CartActionTypes  } from '../actions/cart.actions'
 @Injectable()
 export class AppEffects {
     @Effect()
@@ -42,20 +50,11 @@ export class AppEffects {
         catchError(error => of(ADD_CATEGORY_FAILURE(error)))
     );
     @Effect()
-    addProductToCart$ = this.actions$.pipe(
-        ofType(ADD_PRODUCT_TO_CART),
-        switchMap(() => this.service.addToCart()),
-        switchMap((categories: Category[]) => of(ADD_CATEGORY_SUCCESS({ categories }))),
-        catchError(error => of(ADD_CATEGORY_FAILURE(error)))
-    );
-    @Effect()
     getCart$ = this.actions$.pipe(
         ofType(GET_CART),
         switchMap((action) => this.service.getCart({userId: 'test'})),
         switchMap((cart) => of(GET_CART_SUCCESS({ cart }))),
         catchError(error => of(GET_CART_FAILURE(error)))
-
-
     );
     constructor(
         private actions$: Actions,

@@ -1,7 +1,7 @@
 import {
     Action, createAction, props
 } from '@ngrx/store';
-import { Product,Category } from '../interface';
+import { Product,Category, CartProduct, AppState } from '../interface';
 
 
 export enum CartActionTypes {
@@ -11,6 +11,9 @@ export enum CartActionTypes {
     UPDATE_PRODUCT = '[UPDATE] Product',
     UPDATE_PRODUCT_SUCCESS = '[UPDATE] Product Success',
     UPDATE_PRODUCT_FAILURE = '[UPDATE] Product Failure',
+    UPDATE_CART = '[UPDATE] Product',
+    UPDATE_CART_SUCCESS = '[UPDATE] Product Success',
+    UPDATE_CART_FAILURE = '[UPDATE] Product Failure',
     CLEAR_CART = '[CLEAR] CART',
     CLEAR_CART_SUCCESS = '[CLEAR] CART Success',
     CLEAR_CART_FAILURE = '[CLEAR] CART Failure',
@@ -37,19 +40,20 @@ export const LOAD_PRODUCTS_FAILURE = createAction(
 );
 
 export const ADD_PRODUCT_TO_CART = createAction(
-    '[ADD PRODUCT TO CART] populate product list'
+    '[ADD PRODUCT TO CART]',
+    props<{product: CartProduct}>()
 );
 export const ADD_PRODUCT_TO_CART_SUCCESS = createAction(
-    '[ADD PRODUCT TO CART] populate product list success',
-    props<{ products: Product[] }>()
+    '[ADD PRODUCT TO CART SUCCESS]',
+    props<{ products: CartProduct[] }>()
 );
 export const ADD_PRODUCT_TO_CART_FAILURE = createAction(
-    '[ADD PRODUCT TO CART] update city failure',
+    '[ADD PRODUCT TO CART FAILURE]',
     props<{ err: any }>()
 );
 
 export const ADD_CATEGORY = createAction(
-    '[LOAD CATEGORY] populate product list'
+    '[LOAD CATEGORY] Add category'
 );
 export const ADD_CATEGORY_SUCCESS = createAction(
     '[LOAD CATEGORY] populate product list success',
@@ -75,16 +79,29 @@ export const GET_CART_FAILURE = createAction(
     props<{ err: any }>()
 );
 
+export const UPDATE_CART = createAction(
+    '[GET] populate product list',
+    props<{cart: any}>()
+);
+export const UPDATE_CART_SUCCESS = createAction(
+    '[GET] populate product list success',
+    props<{ cart: any }>()
+);
+export const UPDATE_CART_FAILURE = createAction(
+    '[GET CART] update city failure',
+    props<{ err: any }>()
+);
 
-export class UpdateProduct implements Action {
+
+export class UpdateCart implements Action {
     readonly type = CartActionTypes.UPDATE_PRODUCT;
-    constructor(public payload: Product[]) { }
+    constructor(public payload: any) { }
 }
-export class UpdateProductSuccess implements Action {
+export class UpdateCartSuccess implements Action {
     readonly type = CartActionTypes.UPDATE_PRODUCT_SUCCESS;
-    constructor(public payload: Product[]) { }
+    constructor(public payload: any) { }
 }
-export class UpdateProductFailure implements Action {
+export class UpdateCartFailure implements Action {
     readonly type = CartActionTypes.UPDATE_PRODUCT_FAILURE;
     constructor(public payload: Error) { }
 }
@@ -113,6 +130,6 @@ export class ClearCartFailure implements Action {
 
 
 
-export type CartActions = UpdateProduct | UpdateProductFailure | UpdateProductSuccess |
+export type CartActions = UpdateCart | UpdateCartFailure | UpdateCartSuccess |
     DeleteProduct | DeleteProductSuccess | DeleteProductSuccess |
     ClearCart | ClearCartFailure | ClearCartSuccess;

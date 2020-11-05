@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { endpoint } from '../constants';
 import { User, UserLogin, Product, Category, AppState } from '../interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { getUserId } from '../reducers';
 
@@ -34,21 +34,21 @@ export class Service {
     login(user: UserLogin): Observable<object> {
         return this.http.post(`${endpoint}login`, user);
     }
-    registerUser(user: User): Observable<object> {
+    registerUser(user: User) {
         return this.http.post(`${endpoint}addUser`, user);
     }
     getCart(userId: any): Observable<object> {
         return this.http.get(`${endpoint}cart/${userId.userId}`);
     }
-    addToCart(): Observable<object> {
-        return this.http.post(`${endpoint}cart/add`, {
-            userId: this.userId,
-            products: [{
-                name: 'Shirt',
-                price: 200,
-                quantity: '1'
-            }]
-        });
+    addToCart(payload: any): Observable<object> {
+        try {
+            return this.http.post(`${endpoint}cart/add`,
+{              ...payload
+}            );
+        }
+        catch (e) {
+            console.log(e)
+        }
 
     }
 }

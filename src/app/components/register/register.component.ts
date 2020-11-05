@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Service } from 'src/app/service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppState } from 'src/app/interface';
+import { Store } from '@ngrx/store';
+import { SET_USER_ID } from 'src/app/actions/cart.actions';
 
 
 @Component({
@@ -18,8 +22,17 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private service: Service
+        private service: Service,
+        private snackBar: MatSnackBar,
+        private store: Store<AppState>
     ) { }
+
+    openSnackBar(message: string, ) {
+        this.snackBar.open(message, null, {
+            duration: 2000,
+        });
+    }
+
 
     ngOnInit() {
         this.form = this.formBuilder.group({
@@ -37,21 +50,27 @@ export class RegisterComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
+        const userId = this.f.userId.value
         this.service.registerUser({
             name: this.f.name.value,
             userId: this.f.userId.value,
             password: this.f.password.value
         }).pipe(first())
             .subscribe(
-                data => {
-                    console.log('login successful');
-                    this.router.navigate(['/shopping']);
+                (data: any) => {
+                    this.openSnackBar('Register Successful ');
                 },
-                error => {
-                    console.log(error);
-                    this.loading = false;
-                });
+                (error) => {
+                    console.log(error.status)
+                    if (error.status === 200) {
+                        this.openSnackBar('Register Successful, Please login ');
+                        this.store.dispatch(SET_USER_ID({ userId }))
+                        this.router.navigate(['/shopping']);
+                    }
+                    else {
+                        this.openSnackBar('Registeration failed' + error)
+                    }
 
-        this.loading = true;
+                });
     }
 }

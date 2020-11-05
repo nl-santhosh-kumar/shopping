@@ -1,15 +1,16 @@
 import * as Actions from '../actions/cart.actions';
 import { createFeatureSelector, createSelector, createReducer, on } from '@ngrx/store';
 import { AppState, Cart } from '../interface';
+import { CartActionTypes} from '../actions/cart.actions'
 
 
 const initialState: AppState = {
   products: [],
   total: 0,
   categories: [],
-  userId: '',
+  userId: 'test',
   cart: {
-    userId: null,
+    userId: 'test',
     totalValue: 0,
     product: []
   }
@@ -49,6 +50,14 @@ const _reducer = createReducer(
       userId: action.userId
     };
   }),
+  on(Actions.ADD_PRODUCT_TO_CART, (state, action) => {
+    const cart = JSON.parse(JSON.stringify(state.cart))
+    cart.product.push(action.product);
+    return {
+      ...state,
+      cart
+    };
+  }),
 );
 
 
@@ -64,6 +73,9 @@ export const getProducts = createSelector(
   stateFeature,
   (state: AppState) => state.products
 );
+
+export const getState = createSelector(stateFeature,
+  (state: AppState) => state);
 
 export const getUserId = createSelector(stateFeature,
   (state: AppState) => state.userId

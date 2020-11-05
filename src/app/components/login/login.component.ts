@@ -67,11 +67,14 @@ export class LoginComponent implements OnInit {
                 (data: any) => {
                     if (data.statusMessage !== 'Invalid userId')
                     {
+                        this.openSnackBar('Login Success');
                         const userId: string = user.userId
                         this.store.dispatch(SET_USER_ID({userId}))
                         this.router.navigate(['/shopping']);
+
+                    }else{
+                        this.openSnackBar('Login Failed, please try again');
                     }
-                    this.openSnackBar('Login Failed, please try again');
                 },
                 error => {
                     console.log(error)
