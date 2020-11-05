@@ -25,6 +25,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AppStateKey, AppReducer,  } from './reducers';
 import { AppEffects } from './effects/index'
@@ -75,7 +76,8 @@ import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
     MatListModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

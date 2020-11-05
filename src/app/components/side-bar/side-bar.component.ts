@@ -20,6 +20,8 @@ export class SideBarComponent implements OnInit {
     this.store.pipe(select(getCategories)).subscribe((categories: Category[]) => {
       this.categories = Object.values(categories)
     });
+
+    
   }
 
 }

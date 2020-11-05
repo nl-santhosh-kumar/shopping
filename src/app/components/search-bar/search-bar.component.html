@@ -1,4 +1,17 @@
-<mat-form-field appearance="outline">
-    <input  matInput placeholder="Begin your search">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+  <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input type="text"
+               placeholder="Begin your search"
+               matInput
+               [formControl]="searchBar"
+               [matAutocomplete]="auto"
+               >
+               <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+        (optionSelected)="onCategorySelected()">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>

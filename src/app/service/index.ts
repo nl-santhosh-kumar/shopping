@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { endpoint } from '../constants';
 import { User, UserLogin, Product, Category, AppState } from '../interface';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { getUserId } from '../reducers';
 
@@ -17,12 +17,20 @@ import { getUserId } from '../reducers';
 
 export class Service {
     userId: string = 'test';
+    
+    private categorySource = new BehaviorSubject('');
+    selectedCategory = this.categorySource.asObservable();
+
 
     constructor(private http: HttpClient, private store: Store<AppState>) {
         this.userId = 'test'
         this.store.pipe(select(getUserId)).subscribe((userId: string) => {
             this.userId = userId;
         });
+    }
+
+    onCategorySelection(category: string) {
+        this.categorySource.next(category)
     }
     getProductList(): Observable<Product[]> {
         return (this.http.get<Product[]>(`${endpoint}product`));
@@ -43,8 +51,9 @@ export class Service {
     addToCart(payload: any): Observable<object> {
         try {
             return this.http.post(`${endpoint}cart/add`,
-{              ...payload
-}            );
+                {
+                    ...payload
+                });
         }
         catch (e) {
             console.log(e)
