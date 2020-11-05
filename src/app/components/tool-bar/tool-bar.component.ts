@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getUserId } from 'src/app/reducers';
+import { getUserId, getCart } from 'src/app/reducers';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interface';
 
@@ -19,7 +19,9 @@ export class ToolBarComponent implements OnInit {
     this.store.pipe(select(getUserId)).subscribe((userId: string) => {
       this.showProfile = userId ? true : false;
     });
-    
+    this.store.pipe(select(getCart)).subscribe(cart => {
+        this.cartItems =  cart.product.length || 0
+    })
   }
 
 }
