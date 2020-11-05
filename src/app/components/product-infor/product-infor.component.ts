@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product, AppState } from '../../interface';
 import { UpdateCart, ADD_PRODUCT_TO_CART } from 'src/app/actions/cart.actions';
-import { getCart, getState } from 'src/app/reducers';
 import { Service } from 'src/app/service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 

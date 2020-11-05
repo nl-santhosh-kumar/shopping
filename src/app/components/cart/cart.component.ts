@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, AppState } from 'src/app/interface';
+import { Product, AppState, CartProduct } from 'src/app/interface';
 import { select, Store } from '@ngrx/store';
 import { getCart } from 'src/app/reducers';
 
@@ -10,7 +10,7 @@ import { getCart } from 'src/app/reducers';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  products: Product[];
+  products: CartProduct[];
 
   constructor(private store: Store<AppState>) { }
 
@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   getCart() {
     return this.store.pipe(select(getCart)).subscribe((cart) => {
       console.log(cart)
+      this.products = cart.product
     });
   }
 }

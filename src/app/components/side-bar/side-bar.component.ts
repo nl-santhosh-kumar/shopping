@@ -14,6 +14,7 @@ export class SideBarComponent implements OnInit {
   constructor(public store: Store<AppState>, private service: Service) {}
 
   ngOnInit(): void {
+    this.categories = []
     this.store.pipe(select(getCategories)).subscribe((categories: Category[]) => {
       categories.map((category) => {
         this.categories.push({
