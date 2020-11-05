@@ -1,35 +1,44 @@
 <div class="shopping-cart">
-          <!-- Title -->
-          <div class="title" >
-            Shopping Bag
-          </div>
-         
-          <!-- Product #1 -->
-          <div class="item" *ngFor="let product of products">
-            <div class="image">
-              <img src="{{product.image}}" alt="" />
-            </div>
-            <div class="description">
-              <span>{{product.pName}}</span>
-              <span>{{product.description | slice:[100]}}</span>
-            </div>
-         
-            <div class="quantity">
-                    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-                              <mat-icon>add</mat-icon>
-                            </button>
-              <input type="text" name="name" value="1">
-              <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-                    <mat-icon>remove</mat-icon>
-                  </button>
-            </div>
-         
-            <div class="total-price">{{product.price}}</div>
-          </div>
-          <div class="item" *ngIf="products.length===0">
-               Your cart is empty, <a [routerLink]="['/shopping']" 
-               >
-                    Click here to shop!
-                  </a>
-          </div>
-        </div>
+  <!-- Title -->
+  <div class="title">
+    Shopping Bag
+    <span style="float:right">
+      <a [routerLink]="['/shopping']">
+        Continue Shopping
+      </a></span>
+  </div>
+
+  <!-- Product #1 -->
+  <div class="item" *ngFor="let product of products">
+    <div class="image">
+      <img src="{{product.image}}" alt="" />
+    </div>
+    <div class="description">
+      <span>{{product.pName}}</span>
+      <span>{{product.description | slice:[100]}}</span>
+    </div>
+    <div class="quantity">
+      <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
+        (click)="addQuantity(product)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <input type="text" name="name" value="{{product.quantity }}">
+      <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+
+    <div class="total-price">{{getPrice(product)}}</div>
+  </div>
+  <div class="item" *ngIf="products.length!==0">
+    <div class="final-price">
+      <button mat-stroked-button color="primary">Total Price: {{getCartTotal()}}</button>
+    </div>
+  </div>
+  <div class="item" *ngIf="products.length===0">
+    Your cart is empty, <a [routerLink]="['/shopping']">
+      Click here to shop!
+    </a>
+  </div>
+
+</div>

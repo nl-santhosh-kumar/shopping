@@ -25,9 +25,9 @@ export class ProductListComponent implements OnInit {
       this.products = products;
     });
   }
-  refineSearch(keyword: string){
-   
-   this.products = (this.products.filter(product => product.category == keyword))
+  refineSearch(keyword: string) {
+
+    this.products = (this.products.filter(product => product.category == keyword))
   }
 
 }

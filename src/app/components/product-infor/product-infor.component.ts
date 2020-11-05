@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Product, AppState } from '../../interface';
 import { UpdateCart, ADD_PRODUCT_TO_CART } from 'src/app/actions/cart.actions';
 import { Service } from 'src/app/service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-infor',
@@ -12,19 +12,18 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ProductInforComponent implements OnInit {
 
-  constructor(public store: Store<AppState>, 
-    private service: Service,
-    private snackBar: MatSnackBar,) { }
+  constructor(public store: Store<AppState>,
+    private snackBar: MatSnackBar, ) { }
   @Input() product: Product;
   ngOnInit(): void {
   }
   addToCart(product: Product) {
     // get the cart instance from store 
-   this.store.dispatch(ADD_PRODUCT_TO_CART({product}))
-   this.openSnackBar(product.pName + ' added to cart');
+    this.store.dispatch(ADD_PRODUCT_TO_CART({ product }))
+    this.openSnackBar(product.pName + ' added to cart');
   }
 
-  openSnackBar(message: string,) {
+  openSnackBar(message: string, ) {
     this.snackBar.open(message, null, {
       duration: 2000,
     });
