@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getUserId, getCart } from 'src/app/reducers';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interface';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { AppState } from 'src/app/interface';
 export class ToolBarComponent implements OnInit {
   showProfile: boolean = false;
   cartItems: number = 0;
-  constructor(public store: Store<AppState>) {}
+  constructor(public store: Store<AppState>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.pipe(select(getUserId)).subscribe((userId: string) => {
@@ -23,5 +23,7 @@ export class ToolBarComponent implements OnInit {
         this.cartItems =  cart.product.length || 0
     })
   }
-
+  openCart(){
+    this.router.navigate(['/cart'])
+  }
 }

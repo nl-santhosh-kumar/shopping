@@ -22,7 +22,6 @@ export class ProductInforComponent implements OnInit {
   addToCart(product: Product) {
     // get the cart instance from store 
    this.store.dispatch(ADD_PRODUCT_TO_CART({product}))
-   console.log(product)
    this.openSnackBar(product.pName + ' added to cart');
   }
 

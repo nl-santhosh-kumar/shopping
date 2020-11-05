@@ -16,15 +16,6 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(LOAD_PRODUCTS());
     this.store.dispatch(ADD_CATEGORY());
-
-    // this.store.select(getCart).subscribe((state: any) => {
-    //  // there is a change in cart, call the load cart details
-    //  console.log(state)
-    //  console.log('there is a change in cart')
-    //  this.store.dispatch(UPDATE_CART(state));
-    //  this.store.dispatch(GET_CART({ userId: state.userId }));
-    // })
-
   }
 
 }

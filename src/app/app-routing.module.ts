@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
+import { CartComponent } from './components/cart/cart.component'
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +16,9 @@ const routes: Routes = [{
 {
   path: 'shopping',
   component: LandingComponent
+},{
+  path: 'cart',
+  component: CartComponent
 }];
 
 @NgModule({

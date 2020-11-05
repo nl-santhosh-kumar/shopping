@@ -38,6 +38,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
     SideBarComponent,
     LoginComponent,
     RegisterComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    CartComponent
   ],
   imports: [
     FormsModule,

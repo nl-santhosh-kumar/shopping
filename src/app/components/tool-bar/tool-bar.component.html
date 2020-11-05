@@ -1,8 +1,14 @@
-<mat-toolbar style="background-color: #eff3f6">
+<mat-toolbar>
     <span>SuperKings Shopping</span>
     <span class="example-spacer"></span>
+    <button mat-icon-button
+    aria-label="Example icon-button with share icon"  (click)="openCart()">
     <span matBadge="{{cartItems}}" matBadgeOverlap="false" matBadgePosition="before">
-     <i class="material-icons">shopping_cart</i> 
-    </span>
-    <i *ngIf="showProfile" class="material-icons">account_circle</i> 
-</mat-toolbar>
+        <i class="material-icons"> shopping_cart</i> 
+        </span>
+    </button>
+    
+    <button mat-icon-button style="float:right">
+        <i  class="material-icons">account_circle</i> 
+    </button > 
+  </mat-toolbar>
