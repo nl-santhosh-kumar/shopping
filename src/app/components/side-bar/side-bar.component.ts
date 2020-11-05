@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getProducts, getCategories } from '../../reducers/index';
 import { Store, select } from '@ngrx/store';
 import { Category, AppState } from '../../interface';
+import { Service } from 'src/app/service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
@@ -9,19 +10,21 @@ import { Category, AppState } from '../../interface';
 })
 export class SideBarComponent implements OnInit {
   categories = []
-  task = [
-    { name: 'Vegetables', completed: false },
-    { name: 'Fashion', completed: false  },
-    { name: 'Electronics', completed: false}
-  ]
-  constructor(public store: Store<AppState>) {}
+  task = []
+  constructor(public store: Store<AppState>, private service: Service) {}
 
   ngOnInit(): void {
     this.store.pipe(select(getCategories)).subscribe((categories: Category[]) => {
-      this.categories = Object.values(categories)
+      categories.map((category) => {
+        this.categories.push({
+          cName: category.cName,
+          checked: false
+        })
+      })
     });
-
-    
+  }
+  toggle(event){
+    this.service.onCategorySelection(event.cName)
   }
 
 }
