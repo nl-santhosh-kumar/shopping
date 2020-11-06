@@ -142,5 +142,48 @@
     font-weight: bold;
     float:right;
     margin-top:30px;
-    margin-left:80%;
+    margin-left:70%;
   }
+
+  .summary {
+    margin: 0 auto;
+  }
+
+  
+/* Totals section */
+.totals {
+  width: 400px;
+
+  margin-left:840px;
+  display: flex;
+  flex-direction: column;
+  .totals-item {
+    float: right;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+    
+    label {
+      float: left;
+      clear: both;
+      width: 79%;
+      text-align: right;
+    }
+    
+    .totals-value {
+      float: right;
+      width: 21%;
+      text-align: right;
+    }
+  }
+
+}
+
+.checkout {
+  border: 0;
+  padding: 6px 25px;
+  background-color: #323232;
+  color: #fff;
+  font-size: 18px;
+  height: 50px;
+}

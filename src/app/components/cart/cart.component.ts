@@ -20,21 +20,28 @@ export class CartComponent implements OnInit {
   getCart() {
     return this.store.pipe(select(getCart)).subscribe((cart) => {
       cart.product.map((product) => {
-        this.products.push({ ...product, quantity: 1})
+        this.products.push({ ...product, quantity: 1 })
       })
     });
   }
-  addQuantity (prod: CartProduct) {
-    const matchedProduct = this.products.filter(product => prod== product)[0];
-    console.log(matchedProduct);
-    matchedProduct.quantity +=1
+  addQuantity(prod: CartProduct) {
+    const matchedProduct = this.products.filter((product, index) => prod == product)[0];
+    matchedProduct.quantity += 1
   }
   getPrice(product: CartProduct) {
     return product.price * product.quantity
   }
-  getCartTotal(): number{
+  removeQuantity(prod: CartProduct) {
+    const matchedProduct = this.products.filter(product => prod == product)[0];
+    if (matchedProduct.quantity == 1) {
+      this.products.splice(this.products.indexOf(matchedProduct), 1)
+    } else {
+      matchedProduct.quantity -= 1;
+    }
+  }
+  getCartTotal(): number {
     let totalCartValue = 0;
-    this.products.map((product: CartProduct) => totalCartValue+= (this.getPrice(product)));
+    this.products.map((product: CartProduct) => totalCartValue += (this.getPrice(product)));
     return totalCartValue;
   }
 }
