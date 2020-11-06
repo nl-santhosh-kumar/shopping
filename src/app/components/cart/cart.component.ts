@@ -24,8 +24,8 @@ export class CartComponent implements OnInit {
       })
     });
   }
-  addQuantity (product: CartProduct) {
-    const matchedProduct = this.products.filter(product => product== product)[0];
+  addQuantity (prod: CartProduct) {
+    const matchedProduct = this.products.filter(product => prod== product)[0];
     console.log(matchedProduct);
     matchedProduct.quantity +=1
   }
